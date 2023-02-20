@@ -10,6 +10,7 @@ nodo* add(int n, nodo* node);
 nodo* addLast(int n, nodo* node);
 
 nodo* removeFirst(nodo* node);
+nodo* removeLast(nodo* node);
 
 void printList(nodo* list);
 
@@ -50,6 +51,34 @@ nodo* addLast(int n, nodo* node){
     next -> next = add(n, NULL);
   }else{
     node = add(n, node);
+  }
+  return node;
+}
+
+nodo* removeFirts(nodo* node){
+  if(node != NULL){
+    nodo* toDelete = node;
+    node = node -> next;
+    free(toDelete);
+  }
+
+  return node;
+}
+
+nodo* removeLast(nodo* node){
+  if(node != NULL){
+    if(node -> next != NULL){
+      nodo* thisNode = node;
+      nodo* toDelete = node -> next;
+
+      while(toDelete -> next != NULL){
+        thisNode = toDelete;
+        toDelete = toDelete -> next;
+      }
+      thisNode -> next = removeFirst(toDelete);
+    }else{
+      node = removeFirst(node);
+    }
   }
   return node;
 }
