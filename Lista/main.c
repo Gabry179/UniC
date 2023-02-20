@@ -9,6 +9,8 @@ typedef struct nodo{
 nodo* add(int n, nodo* node);
 nodo* addLast(int n, nodo* node);
 
+nodo* removeFirst(nodo* node);
+
 void printList(nodo* list);
 
 int main (int argc, char *argv[]){
@@ -35,6 +37,19 @@ nodo* add(int n, nodo* node){
     node = (nodo*) malloc(sizeof(nodo));
     node -> element = n;
     node -> next = NULL;
+  }
+  return node;
+}
+
+nodo* addLast(int n, nodo* node){
+  if(node != NULL){
+    nodo* next = node;
+    while (next -> next != NULL){
+        next = next -> next;
+    }
+    next -> next = add(n, NULL);
+  }else{
+    node = add(n, node);
   }
   return node;
 }
